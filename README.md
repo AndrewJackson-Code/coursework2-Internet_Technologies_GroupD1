@@ -54,5 +54,4 @@ Documentation and a proof-of-concept website for Internet Technologies Coursewor
 
    **npm run dev**
 
-6. Open your browser and navigate to the provided URL. and navigate to the provided URL.
-
+6. Open your browser and navigate to the provided URL.
