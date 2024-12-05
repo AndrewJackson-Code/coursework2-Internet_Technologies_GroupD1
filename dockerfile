@@ -2,6 +2,17 @@ FROM node:20-slim
 
 WORKDIR /app
 
+# Install build essentials needed for bcrypt
+# We use apt-get since we're using the slim Debian-based image
+# The steps are:
+# 1. Update package list
+# 2. Install build tools
+# 3. Clean up to keep image size down
+RUN apt-get update \
+    && apt-get install -y python3 make g++ \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
+
 # Install dependencies
 COPY package*.json ./
 RUN npm install
