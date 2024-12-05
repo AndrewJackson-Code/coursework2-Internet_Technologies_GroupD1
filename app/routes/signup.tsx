@@ -14,7 +14,6 @@ export async function action({ request }: ActionFunctionArgs) {
     const firstname = formData.get('firstname') as string;
     const lastname = formData.get('lastname') as string;
 
-
     try {
         const users = await getUsersCollection();
         
@@ -68,10 +67,10 @@ export default function SignUp() {
                         <input type="firstname" name="firstname" id="firstname" className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2" required/>
                     </div>
                     <div>
-                        <label htmlFor="secondname" className="block text-sm font-medium text-gray-700">
+                        <label htmlFor="lastname" className="block text-sm font-medium text-gray-700">
                             Sirname
                         </label>
-                        <input type="secondname" name="secondname" id="secondname" className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2" required/>
+                        <input type="lastname" name="lastname" id="lastname" className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2" required/>
                     </div>
                     <div>
                         <label htmlFor="password" className="block text-sm font-medium text-gray-700">

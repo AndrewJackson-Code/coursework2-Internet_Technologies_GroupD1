@@ -14,28 +14,23 @@ export async function action({ request }: ActionFunctionArgs) {
         const users = await getUsersCollection();
         const user = await users.findOne({ email });
 
-        // Add debug logging
         console.log('Login attempt:', {
             emailProvided: email,
             userFound: !!user,
         });
 
-        // If no user is found, return an error
         if (!user) {
             console.log('No user found with this email');
             return json({ error: 'Invalid credentials' });
         }
 
-        // Add more debug logging
         console.log('Found user, attempting password comparison');
-
-        // Compare the provided password with the stored hash
         const passwordMatch = await bcrypt.compare(password, user.password);
-
         console.log('Password match result:', passwordMatch);
 
         if (passwordMatch) {
-            return redirect('/dashboard');
+            // Pass the email as a URL parameter
+            return redirect(`/dashboard?email=${encodeURIComponent(email)}`);
         } else {
             return json({ error: 'Invalid credentials' });
         }
