@@ -57,33 +57,22 @@ export default function Login() {
                         <label htmlFor="email" className="block text-sm font-medium text-gray-700">
                             Email Address
                         </label>
-                        <input
-                            type="text"
-                            name="email"
-                            id="email"
-                            className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2"
-                            required
-                        />
+                        <input type="text" name="email" id="email" className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2" required/>
                     </div>
                     <div>
                         <label htmlFor="password" className="block text-sm font-medium text-gray-700">
                             Password
                         </label>
-                        <input
-                            type="password"
-                            name="password"
-                            id="password"
-                            className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2"
-                            required
-                        />
+                        <input type="password" name="password" id="password" className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2" required/>
                     </div>
+
+
                     {actionData?.error && (
                         <p className="text-red-500 text-sm">{actionData.error}</p>
                     )}
                     <button
                         type="submit"
-                        className="w-full bg-blue-500 text-white rounded-lg px-4 py-2 hover:bg-blue-600"
-                    >
+                        className="w-full bg-blue-500 text-white rounded-lg px-4 py-2 hover:bg-blue-600">
                         Login
                     </button>
                 </Form>

@@ -7,14 +7,12 @@ export default function Index() {
             <div className="space-y-4">
                 <Link 
                     to="/login" 
-                    className="block px-6 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 text-center"
-                >
+                    className="block px-6 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 text-center">
                     Login
                 </Link>
                 <Link 
                     to="/signup" 
-                    className="block px-6 py-3 bg-green-500 text-white rounded-lg hover:bg-green-600 text-center"
-                >
+                    className="block px-6 py-3 bg-green-500 text-white rounded-lg hover:bg-green-600 text-center">
                     Create Account
                 </Link>
             </div>

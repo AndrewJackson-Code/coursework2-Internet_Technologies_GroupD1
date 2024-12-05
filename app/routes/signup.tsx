@@ -9,16 +9,19 @@ import bcrypt from 'bcrypt';
 export async function action({ request }: ActionFunctionArgs) {
     // Get the form data from the request
     const formData = await request.formData();
-    const username = formData.get('username') as string;
+    const email = formData.get('email') as string;
     const password = formData.get('password') as string;
+    const firstname = formData.get('firstname') as string;
+    const lastname = formData.get('lastname') as string;
+
 
     try {
         const users = await getUsersCollection();
         
-        // Check if username already exists
-        const existingUser = await users.findOne({ username });
+        // Check if email already exists
+        const existingUser = await users.findOne({ email });
         if (existingUser) {
-            return json({ error: 'Username already exists' });
+            return json({ error: 'Email Address already exists' });
         }
 
         // Hash the password before storing it
@@ -27,7 +30,9 @@ export async function action({ request }: ActionFunctionArgs) {
 
         // Insert the new user into the database
         await users.insertOne({
-            username,
+            email,
+            firstname,
+            lastname,
             password: hashedPassword,
             createdAt: new Date()
         });
@@ -51,29 +56,28 @@ export default function SignUp() {
                 
                 <Form method="post" className="space-y-4">
                     <div>
-                        <label htmlFor="username" className="block text-sm font-medium text-gray-700">
-                            Username
+                        <label htmlFor="email" className="block text-sm font-medium text-gray-700">
+                            Email Address
                         </label>
-                        <input
-                            type="text"
-                            name="username"
-                            id="username"
-                            className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2"
-                            required
-                        />
+                        <input type="text" name="email" id="email" className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2" required/>
                     </div>
-
+                    <div>
+                        <label htmlFor="firstname" className="block text-sm font-medium text-gray-700">
+                            First Name
+                        </label>
+                        <input type="firstname" name="firstname" id="firstname" className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2" required/>
+                    </div>
+                    <div>
+                        <label htmlFor="secondname" className="block text-sm font-medium text-gray-700">
+                            Sirname
+                        </label>
+                        <input type="secondname" name="secondname" id="secondname" className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2" required/>
+                    </div>
                     <div>
                         <label htmlFor="password" className="block text-sm font-medium text-gray-700">
                             Password
                         </label>
-                        <input
-                            type="password"
-                            name="password"
-                            id="password"
-                            className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2"
-                            required
-                        />
+                        <input type="password" name="password" id="password" className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2" required/>
                     </div>
 
                     {actionData?.error && (
@@ -82,8 +86,7 @@ export default function SignUp() {
 
                     <button
                         type="submit"
-                        className="w-full bg-green-500 text-white rounded-lg px-4 py-2 hover:bg-green-600"
-                    >
+                        className="w-full bg-green-500 text-white rounded-lg px-4 py-2 hover:bg-green-600">
                         Create Account
                     </button>
                 </Form>
