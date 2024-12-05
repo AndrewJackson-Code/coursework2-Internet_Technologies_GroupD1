@@ -1,21 +1,48 @@
+// app/routes/login.tsx
 import { Form, useActionData } from '@remix-run/react';
 import { json, redirect } from '@remix-run/node';
 import type { ActionFunctionArgs } from '@remix-run/node';
 import { getUsersCollection } from '~/functions/db.server';
+import bcrypt from 'bcrypt';
 
 export async function action({ request }: ActionFunctionArgs) {
     const formData = await request.formData();
-    const username = formData.get('username') as string;
+    const email = formData.get('email') as string;
     const password = formData.get('password') as string;
 
-    const users = await getUsersCollection();
-    const user = await users.findOne({ username, password });
+    try {
+        const users = await getUsersCollection();
+        const user = await users.findOne({ email });
 
-    if (user) {
-        return redirect('/dashboard');
+        // Add debug logging
+        console.log('Login attempt:', {
+            emailProvided: email,
+            userFound: !!user,
+        });
+
+        // If no user is found, return an error
+        if (!user) {
+            console.log('No user found with this email');
+            return json({ error: 'Invalid credentials' });
+        }
+
+        // Add more debug logging
+        console.log('Found user, attempting password comparison');
+
+        // Compare the provided password with the stored hash
+        const passwordMatch = await bcrypt.compare(password, user.password);
+
+        console.log('Password match result:', passwordMatch);
+
+        if (passwordMatch) {
+            return redirect('/dashboard');
+        } else {
+            return json({ error: 'Invalid credentials' });
+        }
+    } catch (error) {
+        console.error('Login error:', error);
+        return json({ error: 'Login failed' });
     }
-
-    return json({ error: 'Invalid credentials' });
 }
 
 export default function Login() {
@@ -27,13 +54,13 @@ export default function Login() {
                 <h1 className="text-2xl font-bold mb-6 text-center">Login</h1>
                 <Form method="post" className="space-y-4">
                     <div>
-                        <label htmlFor="username" className="block text-sm font-medium text-gray-700">
-                            Username
+                        <label htmlFor="email" className="block text-sm font-medium text-gray-700">
+                            Email Address
                         </label>
                         <input
                             type="text"
-                            name="username"
-                            id="username"
+                            name="email"
+                            id="email"
                             className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2"
                             required
                         />
