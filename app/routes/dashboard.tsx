@@ -1,6 +1,7 @@
 // app/routes/dashboard.tsx
 import { Form, useLoaderData, useActionData } from '@remix-run/react';
 import { json, redirect } from '@remix-run/node';
+import Navbar from "../components/navbar";
 import type { ActionFunctionArgs, LoaderFunctionArgs } from '@remix-run/node';
 import { getUsersCollection } from '~/functions/db.server';
 import bcrypt from 'bcrypt';
@@ -78,7 +79,9 @@ export default function Dashboard() {
     const actionData = useActionData<typeof action>();
 
     return (
-        <div className="min-h-screen bg-gray-100 py-12">
+        <>
+        <Navbar/>
+        <div className="min-h-screen bg-gray-100 py-20">
             <div className="max-w-3xl mx-auto px-4">
                 <div className="bg-white rounded-lg shadow-md p-8">
                     <h1 className="text-3xl font-bold mb-8">Your Profile</h1>
@@ -171,5 +174,6 @@ export default function Dashboard() {
                 </div>
             </div>
         </div>
+        </>
     );
 }

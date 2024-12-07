@@ -1,6 +1,7 @@
 // app/routes/signup.tsx
 import { Form, useActionData } from '@remix-run/react';
 import { json, redirect } from '@remix-run/node';
+import Navbar from "../components/navbar";
 import type { ActionFunctionArgs } from '@remix-run/node';
 import { getUsersCollection } from '~/functions/db.server';
 import bcrypt from 'bcrypt';
@@ -49,6 +50,8 @@ export default function SignUp() {
     const actionData = useActionData<typeof action>();
 
     return (
+        <>
+        <Navbar/>
         <div className="min-h-screen bg-gray-100 flex flex-col items-center justify-center">
             <div className="bg-white p-8 rounded-lg shadow-md w-96">
                 <h1 className="text-2xl font-bold mb-6 text-center">Create Account</h1>
@@ -91,5 +94,6 @@ export default function SignUp() {
                 </Form>
             </div>
         </div>
+        </>
     );
 }

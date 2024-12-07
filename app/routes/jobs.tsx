@@ -1,6 +1,7 @@
 // app/routes/jobs.tsx
 import { json } from '@remix-run/node';
 import { useLoaderData, useSearchParams } from '@remix-run/react';
+import Navbar from "../components/navbar";
 import type { LoaderFunctionArgs } from '@remix-run/node';
 
 // Define types for our API response
@@ -71,7 +72,9 @@ export default function Jobs() {
     };
 
     return (
-        <div className="min-h-screen bg-gray-100 py-12">
+        <>
+        <Navbar/>
+        <div className="min-h-screen bg-gray-100 py-24">
             <div className="max-w-4xl mx-auto px-4">
                 {/* Search Form */}
                 <form onSubmit={handleSearch} className="bg-white p-6 rounded-lg shadow-md mb-8">
@@ -149,5 +152,6 @@ export default function Jobs() {
                 </div>
             </div>
         </div>
+        </>
     );
 }

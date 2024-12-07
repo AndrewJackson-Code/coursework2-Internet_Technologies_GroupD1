@@ -1,7 +1,10 @@
 import { Link } from '@remix-run/react';
+import Navbar from "../components/navbar";
 
 export default function Index() {
     return (
+      <>
+      <Navbar/>
         <div className="min-h-screen bg-gray-100 flex flex-col items-center justify-center">
             <h1 className="text-4xl font-bold mb-8">Welcome to Job Finder</h1>
             <h1 className='text-2xl'>Developers: 
@@ -29,5 +32,6 @@ export default function Index() {
                 </Link>
             </div>
         </div>
+        </>
     );
 }
