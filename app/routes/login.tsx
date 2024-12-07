@@ -23,10 +23,8 @@ export async function action({ request }: ActionFunctionArgs) {
             console.log('No user found with this email');
             return json({ error: 'Invalid credentials' });
         }
-
-        console.log('Found user, attempting password comparison');
+        
         const passwordMatch = await bcrypt.compare(password, user.password);
-        console.log('Password match result:', passwordMatch);
 
         if (passwordMatch) {
             // Pass the email as a URL parameter
