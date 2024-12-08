@@ -1,15 +1,12 @@
-// app/functions/db.server.ts
 import { MongoClient } from 'mongodb';
 
-// Access the environment variable
+// need .env for this to work so we are not sharing our connection string
 const connectionString = process.env.MONGODB_URI;
 
-// Check if the connection string exists
 if (!connectionString) {
     throw new Error('MIssing Connecection String!');
 }
 
-// Create a MongoClient instance
 const client = new MongoClient(connectionString);
 
 export async function connectDb() {

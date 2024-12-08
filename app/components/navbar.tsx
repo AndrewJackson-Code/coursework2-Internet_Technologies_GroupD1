@@ -1,5 +1,5 @@
 import { Link } from "@remix-run/react";
-import { Home } from "lucide-react";
+import { Home, Briefcase } from "lucide-react";
 
 export default function Navbar() {
   return (
@@ -10,6 +10,12 @@ export default function Navbar() {
           className="flex items-center space-x-2 text-gray-700 hover:text-gray-900 transition-colors">
           <Home size={20} />
           <span className="font-medium">Home</span>
+        </Link>
+        <Link 
+          to="/jobs" 
+          className="flex items-center space-x-2 text-gray-700 hover:text-gray-900 transition-colors">
+          <Briefcase size={20} />
+          <span className="font-medium">Jobs</span>
         </Link>
       </div>
     </nav>

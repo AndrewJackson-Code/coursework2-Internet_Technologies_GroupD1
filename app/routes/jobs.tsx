@@ -22,7 +22,7 @@ type ApiResponse = {
     results: Job[];
 };
 
-// Loader function to fetch jobs
+// Function to fetch jobs
 export async function loader({ request }: LoaderFunctionArgs) {
     // Get search parameters from the URL
     const url = new URL(request.url);
@@ -36,10 +36,9 @@ export async function loader({ request }: LoaderFunctionArgs) {
     apiUrl.searchParams.set('sort_by', 'relevance');
 
     try {
-        // Make the API request
         const response = await fetch(apiUrl.toString(), {
             headers: {
-                'Authorization': 'Token aa5a2aa6a2ba99395958f8aa56449940114f3392'
+                'Authorization': `Token ${process.env.API_TOKEN}`
             }
         });
 
@@ -88,9 +87,7 @@ export default function Jobs() {
                                 id="search"
                                 name="search"
                                 defaultValue={searchParams.get('search') || ''}
-                                className="w-full px-4 py-2 border rounded-md"
-                                placeholder="Enter job title here"
-                            />
+                                className="w-full px-4 py-2 border rounded-md"/>
                         </div>
                         <div className="flex-1">
                             <label htmlFor="location" className="block text-sm font-medium text-gray-700 mb-1">
@@ -101,15 +98,12 @@ export default function Jobs() {
                                 id="location"
                                 name="location"
                                 defaultValue={searchParams.get('location') || ''}
-                                className="w-full px-4 py-2 border rounded-md"
-                                placeholder="Enter location here"
-                            />
+                                className="w-full px-4 py-2 border rounded-md"/>
                         </div>
                         <div className="flex items-end">
                             <button
                                 type="submit"
-                                className="px-6 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600"
-                            >
+                                className="px-6 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600">
                                 Search
                             </button>
                         </div>
@@ -142,8 +136,7 @@ export default function Jobs() {
                                     href={job.url}
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="text-blue-500 hover:text-blue-600"
-                                >
+                                    className="text-blue-500 hover:text-blue-600">
                                     View Job →
                                 </a>
                             </div>

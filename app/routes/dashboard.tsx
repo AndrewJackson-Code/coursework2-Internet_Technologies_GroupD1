@@ -1,4 +1,3 @@
-// app/routes/dashboard.tsx
 import { Form, useLoaderData, useActionData } from '@remix-run/react';
 import { json, redirect } from '@remix-run/node';
 import Navbar from "../components/navbar";
@@ -6,7 +5,6 @@ import type { ActionFunctionArgs, LoaderFunctionArgs } from '@remix-run/node';
 import { getUsersCollection } from '~/functions/db.server';
 import bcrypt from 'bcrypt';
 
-// The loader function remains the same as before
 export async function loader({ request }: LoaderFunctionArgs) {
     try {
         const url = new URL(request.url);
@@ -69,14 +67,13 @@ export async function action({ request }: ActionFunctionArgs) {
             { $set: updates }
         );
 
-        // Redirect to reflect the new email if it was changed
+        // Redirect to reflect the new email in case it was changed
         return redirect(`/dashboard?email=${encodeURIComponent(updates.email)}`);
     }
 }
 
 export default function Dashboard() {
     const { user } = useLoaderData<typeof loader>();
-    const actionData = useActionData<typeof action>();
 
     return (
         <>
@@ -86,7 +83,6 @@ export default function Dashboard() {
                 <div className="bg-white rounded-lg shadow-md p-8">
                     <h1 className="text-3xl font-bold mb-8">Your Profile</h1>
                     
-                    {/* Update Form */}
                     <Form method="post" className="space-y-6">
                         <input type="hidden" name="intent" value="update" />
                         <input type="hidden" name="currentEmail" value={user.email} />
@@ -145,14 +141,12 @@ export default function Dashboard() {
 
                             <button
                                 type="submit"
-                                className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
-                            >
+                                className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
                                 Update Details
                             </button>
                         </div>
                     </Form>
 
-                    {/* Delete Account Form */}
                     <div className="mt-8 pt-8 border-t">
                         <h2 className="text-xl font-semibold text-red-600 mb-4">Danger Zone</h2>
                         <Form method="post">
@@ -162,11 +156,7 @@ export default function Dashboard() {
                                 type="submit"
                                 className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
                                 onClick={(e) => {
-                                    if (!confirm('Delete your account?')) {
-                                        e.preventDefault();
-                                    }
-                                }}
-                            >
+                                    if (!confirm('Delete your account?')) {e.preventDefault();}}}>
                                 Delete Account
                             </button>
                         </Form>
