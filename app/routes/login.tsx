@@ -41,7 +41,7 @@ export default function Login() {
 
     return (
         <div className="min-h-screen relative">
-            {/* Background image with overlay */}
+
             <div 
                 className="absolute inset-0 bg-cover bg-center bg-no-repeat"
                 style={{
@@ -51,12 +51,10 @@ export default function Login() {
                 <div className="absolute inset-0 bg-black/50"></div>
             </div>
 
-            {/* Navbar */}
             <div className="relative">
                 <Navbar />
             </div>
 
-            {/* Main content */}
             <div className="relative min-h-[calc(100vh-64px)] flex flex-col items-center justify-center px-4">
                 <div className="bg-white/90 backdrop-blur-sm p-8 rounded-lg shadow-xl w-full max-w-md">
                     <h1 className="text-3xl font-bold mb-6 text-center text-gray-800">Login</h1>

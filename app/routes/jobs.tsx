@@ -3,7 +3,6 @@ import { useLoaderData, useSearchParams } from '@remix-run/react';
 import Navbar from "../components/navbar";
 import type { LoaderFunctionArgs } from '@remix-run/node';
 
-// Keep the type definitions and loader function unchanged
 type Job = {
     id: number;
     role: string;
