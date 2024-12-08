@@ -19,7 +19,6 @@ export async function action({ request }: ActionFunctionArgs) {
             userFound: !!user,
         });
 
-
         if (!user) {
             return json({ error: 'Invalid credentials' });
         }
@@ -27,7 +26,6 @@ export async function action({ request }: ActionFunctionArgs) {
         const passwordMatch = await bcrypt.compare(password, user.password);
 
         if (passwordMatch) {
-            // Pass the email as a URL parameter for now we'll need sessions for the full implementation
             return redirect(`/dashboard?email=${encodeURIComponent(email)}`);
         } else {
             return json({ error: 'Invalid credentials' });
@@ -42,44 +40,72 @@ export default function Login() {
     const actionData = useActionData<typeof action>();
 
     return (
-        <>
-            <Navbar />
-            <div className="min-h-screen bg-gray-100 flex flex-col items-center justify-center">
-                <div className="bg-white p-8 rounded-lg shadow-md w-96">
-                    <h1 className="text-2xl font-bold mb-6 text-center">Login</h1>
+        <div className="min-h-screen relative">
+            {/* Background image with overlay */}
+            <div 
+                className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+                style={{
+                    backgroundImage: "url('/background.jpg')",
+                }}
+            >
+                <div className="absolute inset-0 bg-black/50"></div>
+            </div>
+
+            {/* Navbar */}
+            <div className="relative">
+                <Navbar />
+            </div>
+
+            {/* Main content */}
+            <div className="relative min-h-[calc(100vh-64px)] flex flex-col items-center justify-center px-4">
+                <div className="bg-white/90 backdrop-blur-sm p-8 rounded-lg shadow-xl w-full max-w-md">
+                    <h1 className="text-3xl font-bold mb-6 text-center text-gray-800">Login</h1>
+
                     <Form method="post" className="space-y-4">
                         <div>
                             <label htmlFor="email" className="block text-sm font-medium text-gray-700">
                                 Email Address
                             </label>
-                            <input type="text" name="email" id="email" className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2" required />
+                            <input 
+                                type="email" 
+                                name="email" 
+                                id="email" 
+                                className="mt-1 block w-full rounded-lg border border-gray-300 px-4 py-2 focus:border-blue-500 focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50" 
+                                required 
+                            />
                         </div>
                         <div>
                             <label htmlFor="password" className="block text-sm font-medium text-gray-700">
                                 Password
                             </label>
-                            <input type="password" name="password" id="password" className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2" required />
+                            <input 
+                                type="password" 
+                                name="password" 
+                                id="password" 
+                                className="mt-1 block w-full rounded-lg border border-gray-300 px-4 py-2 focus:border-blue-500 focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50" 
+                                required 
+                            />
                         </div>
 
-
                         {actionData?.error && (
-                            <p className="text-red-500 text-sm">{actionData.error}</p>
+                            <p className="text-red-500 text-sm font-medium">{actionData.error}</p>
                         )}
-                        <div className="flex gap-4">
+
+                        <div className="flex gap-4 pt-2">
                             <button
                                 type="submit"
-                                className="flex-1 bg-blue-500 text-white rounded-lg px-4 py-2 hover:bg-blue-600">
+                                className="flex-1 bg-blue-500 text-white rounded-lg px-4 py-3 hover:bg-blue-600 transition-colors duration-200 font-medium">
                                 Login
                             </button>
                             <Link
                                 to="/"
-                                className="flex-1 bg-gray-500 text-white rounded-lg px-4 py-2 hover:bg-gray-600 text-center">
+                                className="flex-1 bg-gray-500 text-white rounded-lg px-4 py-3 hover:bg-gray-600 transition-colors duration-200 font-medium text-center">
                                 Back
                             </Link>
                         </div>
                     </Form>
                 </div>
             </div>
-        </>
+        </div>
     );
 }
