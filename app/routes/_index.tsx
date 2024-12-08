@@ -6,12 +6,14 @@ export default function Index() {
         <>
             <Navbar />
             <div className="min-h-screen bg-gray-100 flex flex-col items-center justify-center">
-                <h1 className="text-4xl font-bold mb-8">Welcome to Job Finder</h1>
+                <h1 className="text-4xl font-bold mb-8">GROUP D1 PROOF OF CONCEPT SITE</h1>
                 <h1 className='text-2xl'>Developers:
                     <ul>
                         <li>Andrew - B01649915</li>
                         <li>Lucas - B01652603</li>
                     </ul>
+
+                   
                 </h1>
                 <br /><br />
                 <div className="space-y-4">
