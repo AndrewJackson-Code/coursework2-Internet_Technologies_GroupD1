@@ -1,6 +1,8 @@
 import { MongoClient } from 'mongodb';
 
 // need .env for this to work so we are not sharing our connection string
+// nevermind I added the .env to github anyway incase the hosting doesn't work.
+// Oh well!
 const connectionString = process.env.MONGODB_URI;
 
 if (!connectionString) {
