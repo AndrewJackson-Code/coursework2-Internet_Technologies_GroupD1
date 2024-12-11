@@ -5,6 +5,8 @@ Documentation and a proof-of-concept website for Internet Technologies Coursewor
  - B01649915 - Andrew Jackson 
  - B01652603 - Lucas Hettrick-Weir
 
+Available At: it-cw2-groupd1.duckdns.org/
+
  
 # Downloading and Running Locally
 
